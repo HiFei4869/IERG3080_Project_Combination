@@ -127,7 +127,7 @@ namespace WpfApp2
         private void InitializeGame()
         {
             gameTimer = new DispatcherTimer();
-            gameTimer.Interval = TimeSpan.FromMilliseconds(500); // Adjust as needed
+            gameTimer.Interval = TimeSpan.FromMilliseconds(20); // Adjust as needed
             gameTimer.Tick += GameLoop;
             gameTimer.Start();
         }
@@ -183,27 +183,46 @@ namespace WpfApp2
                 Position.ChangePosition(planet);
             }*/
 
+            //private const double G = 6.674e-11;
+
             for (int i = 0; i < Globals.planet_list.Count; i++)
             {
                 Planet planet = Globals.planet_list.ElementAt(i);
 
-                double angle = Math.Atan((planet.y - 480) / (planet.x - 270));
-                planet.x += 0.02 * planet.v_x;
-                planet.y += 0.02 * planet.v_y;
-                planet.v_y -= 10 * Math.Sin(angle);
-                planet.v_x -= 10 * Math.Cos(angle);
+                if(planet.id != 2)
+                {
+                    
+                    double r = Math.Sqrt(Math.Pow(planet.x - 480, 2) + Math.Pow(planet.y - 270, 2));
+                    double a = r;
+                    double v = Math.Sqrt(10 * 100000 * (2 / r - 1 / a));
+                    planet.v_x = v * (planet.y - 270) / r;
+                    planet.v_y = -v * (planet.x - 480) / r;
+                    planet.x += 0.02 * planet.v_x;
+                    planet.y += 0.02 * planet.v_y;
 
-                Planet newPlanet = new Planet();
-                newPlanet.id = planet.id;
-                newPlanet.x = planet.x;
-                newPlanet.y = planet.y;
-                newPlanet.mass = planet.mass;
-                newPlanet.radius = planet.radius;
-                newPlanet.v_x = planet.v_x;
-                newPlanet.v_y = planet.v_y;
-                newPlanet.color = planet.color;
-                Globals.planet_list_new.AddLast(newPlanet);
-                //Debug.WriteLine($"1111Planet {planet.id}: x = {planet.x}, y = {planet.y}");
+                    /*double angle = Math.Atan((planet.y - 270) / (planet.x - 480));
+                    planet.x += 0.02 * planet.v_x;
+                    planet.y += 0.02 * planet.v_y;
+                    planet.v_y -= 10 * Math.Sin(angle);
+                    planet.v_x -= 10 * Math.Cos(angle);*/
+
+                    Planet newPlanet = new Planet();
+                    newPlanet.id = planet.id;
+                    newPlanet.x = planet.x;
+                    newPlanet.y = planet.y;
+                    newPlanet.mass = planet.mass;
+                    newPlanet.radius = planet.radius;
+                    newPlanet.v_x = planet.v_x;
+                    newPlanet.v_y = planet.v_y;
+                    newPlanet.color = planet.color;
+                    Globals.planet_list_new.AddLast(newPlanet);
+                    //Debug.WriteLine($"1111Planet {planet.id}: x = {planet.x}, y = {planet.y}");
+                }
+
+                else
+                {
+                    Globals.planet_list_new.AddLast(planet);
+                }
             }
 
             Globals.planet_list.Clear();
