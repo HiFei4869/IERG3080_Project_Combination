@@ -12,6 +12,7 @@ namespace NewEndCollision
     {
         public static LinkedList<Planet> planet_list = new LinkedList<Planet>();
         public static LinkedList<Planet> planet_list_new = new LinkedList<Planet>();
+        public static LinkedList<Planet> planet_list_color = new LinkedList<Planet>();
         public static Planet player = new Planet();
         public static Planet sun = new Planet();
 

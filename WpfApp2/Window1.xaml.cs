@@ -160,15 +160,82 @@ namespace WpfApp2
                     }
                 }
 
+                ////change color
+
                 Planet player = findPlayer();
-                foreach (Planet planet in Globals.planet_list)                //change color
+                /*foreach (Planet planet in Globals.planet_list)                //change color
                 {
 
                     if (planet.id != 1 && planet.id != 2)
                     {
                         Color.ChangeColor(player, planet);
                     }
+                }*/
+
+                for (int i = 0; i < Globals.planet_list.Count; i++)
+                {
+                    Planet planet = Globals.planet_list.ElementAt(i);
+
+                    if (planet.id != 1 && planet.id != 2)
+                    {
+                        if (player.radius > planet.radius)
+                        {
+                            planet.color = 0;
+
+                            Planet newPlanet = new Planet();
+                            newPlanet.id = planet.id;
+                            newPlanet.x = planet.x;
+                            newPlanet.y = planet.y;
+                            newPlanet.mass = planet.mass;
+                            newPlanet.radius = planet.radius;
+                            newPlanet.v_x = planet.v_x;
+                            newPlanet.v_y = planet.v_y;
+                            newPlanet.color = planet.color;
+                            Globals.planet_list_color.AddLast(newPlanet);
+                        }
+                        else
+                        {
+                            planet.color = 1;
+                            
+                            Planet newPlanet = new Planet();
+                            newPlanet.id = planet.id;
+                            newPlanet.x = planet.x;
+                            newPlanet.y = planet.y;
+                            newPlanet.mass = planet.mass;
+                            newPlanet.radius = planet.radius;
+                            newPlanet.v_x = planet.v_x;
+                            newPlanet.v_y = planet.v_y;
+                            newPlanet.color = planet.color;
+                            Globals.planet_list_color.AddLast(newPlanet);
+                        }
+                    }
+
+                    else
+                    {
+                        Globals.planet_list_color.AddLast(planet);
+                    }
                 }
+
+                Globals.planet_list.Clear();
+
+                foreach (var newplanet in Globals.planet_list_color)
+                {
+                    Globals.planet_list.AddLast(new Planet
+                    {
+                        id = newplanet.id,
+                        x = newplanet.x,
+                        y = newplanet.y,
+                        mass = newplanet.mass,
+                        radius = newplanet.radius,
+                        v_x = newplanet.v_x,
+                        v_y = newplanet.v_y,
+                        color = newplanet.color
+                    });
+                }
+
+                Globals.planet_list_color.Clear();
+
+                ////eject objects
 
                 if (check_ejection == 1)
                 {                    
@@ -182,6 +249,8 @@ namespace WpfApp2
             {
                 Position.ChangePosition(planet);
             }*/
+            
+            ////change position
 
             //private const double G = 6.674e-11;
 
@@ -190,8 +259,7 @@ namespace WpfApp2
                 Planet planet = Globals.planet_list.ElementAt(i);
 
                 if(planet.id != 2)
-                {
-                    
+                {                  
                     double r = Math.Sqrt(Math.Pow(planet.x - 480, 2) + Math.Pow(planet.y - 270, 2));
                     double a = r;
                     double v = Math.Sqrt(10 * 100000 * (2 / r - 1 / a));
