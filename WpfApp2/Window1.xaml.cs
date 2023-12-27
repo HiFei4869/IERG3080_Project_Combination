@@ -239,7 +239,7 @@ namespace WpfApp2
 
                 if (check_ejection == 1)
                 {                    
-                    Movement.SplitEject(player, x_c, y_c);                //eject objects(not done!!!)
+                    Movement.SplitEject(Globals.planet_list, player, x_c, y_c);
                     check_ejection = 0;
                 }
 
