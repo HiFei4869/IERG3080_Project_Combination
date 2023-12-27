@@ -196,7 +196,7 @@ namespace WpfApp2
                         else
                         {
                             planet.color = 1;
-                            
+
                             Planet newPlanet = new Planet();
                             newPlanet.id = planet.id;
                             newPlanet.x = planet.x;
@@ -241,6 +241,11 @@ namespace WpfApp2
                 {                    
                     Movement.SplitEject(player, x_c, y_c);                //eject objects(not done!!!)
                     check_ejection = 0;
+                }
+
+                if(player.mass <= 0)
+                {
+                    die = 1;
                 }
 
                 //Position.ChangePosition(Globals.planet_list);

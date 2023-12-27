@@ -112,8 +112,9 @@ namespace NewEndCollision
         {
             Globals.sun.x = 480.0;
             Globals.sun.y = 270.0;
-            Globals.sun.mass = 100000;
             Globals.sun.radius = 5;
+            //Globals.sun.mass = 100000;
+            Globals.sun.mass = Globals.sun.radius * Globals.sun.radius * Math.PI;
             Globals.sun.v_x = 0;
             Globals.sun.v_y = 0;
             Globals.sun.color = 3;
@@ -121,8 +122,9 @@ namespace NewEndCollision
 
             Globals.player.x = 600;
             Globals.player.y = 100;
-            Globals.player.mass = 6.25;
             Globals.player.radius = 2.5;
+            //Globals.player.mass = 6.25;
+            Globals.player.mass = Globals.player.radius * Globals.player.radius * Math.PI;
             Globals.player.v_x = initial_velocity(Globals.player.radius) * Math.Cos(initial_angle(Globals.player.x, Globals.player.y));
             Globals.player.v_y = initial_velocity(Globals.player.radius) * Math.Sin(initial_angle(Globals.player.x, Globals.player.y));
             Globals.player.color = 2;
@@ -146,7 +148,8 @@ namespace NewEndCollision
                         test = false;
                     }
                 }
-                planet.mass = planet.radius * planet.radius;
+                //planet.mass = planet.radius * planet.radius;
+                planet.mass = planet.radius * planet.radius * Math.PI;
                 planet.v_x = initial_velocity(planet.radius) * Math.Cos(initial_angle(planet.x, planet.y));
                 planet.v_y = initial_velocity(planet.radius) * Math.Sin(initial_angle(planet.x, planet.y));
                 planet.color = 0;
@@ -169,7 +172,8 @@ namespace NewEndCollision
                         test = false;
                     }
                 }
-                planet.mass = planet.radius * planet.radius;
+                //planet.mass = planet.radius * planet.radius;
+                planet.mass = planet.radius * planet.radius * Math.PI;
                 planet.v_x = initial_velocity(planet.radius) * Math.Cos(initial_angle(planet.x, planet.y));
                 planet.v_y = initial_velocity(planet.radius) * Math.Sin(initial_angle(planet.x, planet.y));
                 planet.color = 1;
