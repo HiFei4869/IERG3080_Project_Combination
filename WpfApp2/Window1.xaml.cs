@@ -10,7 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-//using System.Windows.Media;
+using System.Windows.Media;
 //using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
@@ -78,6 +78,31 @@ namespace WpfApp2
 
     public partial class Window1 : Window
     {
+        private double zoomScale = 1.0;
+        private double zoomIncrement = 0.1;
+        private void OnMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            // Zoom in
+            if (e.Delta > 0)
+            {
+                zoomScale += zoomIncrement;
+            }
+            // Zoom out
+            else
+            {
+                zoomScale -= zoomIncrement;
+                // Ensure zoom scale doesn't go below 1
+                zoomScale = Math.Max(zoomScale, 1.0);
+            }
+
+            // Apply the zoom transformation
+            ApplyZoom();
+        }
+        private void ApplyZoom()
+        {
+            // Apply the zoom transformation to the canvas
+            GameCanvas.RenderTransform = new ScaleTransform(zoomScale, zoomScale);
+        }
         public static Planet findPlayer()
         {
             LinkedListNode<Planet> node = Globals.planet_list.First;
@@ -122,6 +147,8 @@ namespace WpfApp2
             _viewModel = new GameViewModel();
             this.DataContext = _viewModel;
             InitializeGame();
+            // Hook up the MouseWheel event for zooming
+            this.MouseWheel += OnMouseWheel;
         }
 
         private void InitializeGame()
