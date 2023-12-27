@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>WpfApp2</id>
+    <version>1.0.0</version>
+    <authors>WpfApp2</authors>
+    <description>Package Description</description>
+    <repository type="git" />
+    <dependencies>
+      <group targetFramework="net8.0-windows7.0" />
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net8.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
+      </group>
+    </frameworkReferences>
+    <contentFiles>
+      <files include="any/net8.0-windows7.0/start.jpg" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/sun.gif" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+  <files>
+    <file src="C:\Users\29518\Desktop\WpfApp2 - 副本\WpfApp2\bin\Debug\net8.0-windows\WpfApp2.runtimeconfig.json" target="lib\net8.0-windows7.0\WpfApp2.runtimeconfig.json" />
+    <file src="C:\Users\29518\Desktop\WpfApp2 - 副本\WpfApp2\bin\Debug\net8.0-windows\WpfApp2.dll" target="lib\net8.0-windows7.0\WpfApp2.dll" />
+    <file src="C:\Users\29518\Desktop\WpfApp2 - 副本\WpfApp2\start.jpg" target="content\start.jpg" />
+    <file src="C:\Users\29518\Desktop\WpfApp2 - 副本\WpfApp2\start.jpg" target="contentFiles\any\net8.0-windows7.0\start.jpg" />
+    <file src="C:\Users\29518\Desktop\WpfApp2 - 副本\WpfApp2\sun.gif" target="content\sun.gif" />
+    <file src="C:\Users\29518\Desktop\WpfApp2 - 副本\WpfApp2\sun.gif" target="contentFiles\any\net8.0-windows7.0\sun.gif" />
+  </files>
+</package>

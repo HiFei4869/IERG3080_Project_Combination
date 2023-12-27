@@ -1,0 +1,16 @@
+﻿<Window x:Class="WpfApp2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="540" Width="960">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="start.jpg" Stretch="UniformToFill" AlignmentX="Center" AlignmentY="Center" />
+        </Grid.Background>
+        <TextBlock Text="OSMOS" FontFamily="Brush Script MT" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="112" FontWeight="Bold" Foreground="White" Margin="0,148,0,0" Height="140" Width="447" />
+        <Button  Content="Click Here to Start!" Click="Next_Window"  Margin="171,338,225,81" Foreground="Red" Background="Transparent" FontSize="33"/>
+    </Grid>
+</Window>
