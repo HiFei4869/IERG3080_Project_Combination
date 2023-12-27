@@ -3,12 +3,15 @@ using WpfApp2;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Diagnostics;
+using System.Windows.Controls;
 
 namespace NewEndCollision
 {
     public class Globals
     {
         public static LinkedList<Planet> planet_list = new LinkedList<Planet>();
+        public static LinkedList<Planet> planet_list_new = new LinkedList<Planet>();
         public static Planet player = new Planet();
         public static Planet sun = new Planet();
 
@@ -109,7 +112,7 @@ namespace NewEndCollision
             Globals.sun.x = 480.0;
             Globals.sun.y = 270.0;
             Globals.sun.mass = 100000;
-            Globals.sun.radius = 50;
+            Globals.sun.radius = 5;
             Globals.sun.v_x = 0;
             Globals.sun.v_y = 0;
             Globals.sun.color = 3;
@@ -122,7 +125,7 @@ namespace NewEndCollision
             Globals.player.v_x = initial_velocity(Globals.player.radius) * Math.Cos(initial_angle(Globals.player.x, Globals.player.y));
             Globals.player.v_y = initial_velocity(Globals.player.radius) * Math.Sin(initial_angle(Globals.player.x, Globals.player.y));
             Globals.player.color = 2;
-            Globals.player.id = 1;
+            Globals.player.id = 1; 
 
             Globals.planet_list= new LinkedList<Planet>();
             Globals.planet_list.AddLast(Globals.sun);
@@ -144,7 +147,7 @@ namespace NewEndCollision
                 }
                 planet.mass = planet.radius * planet.radius;
                 planet.v_x = initial_velocity(planet.radius) * Math.Cos(initial_angle(planet.x, planet.y));
-                planet.v_x = initial_velocity(planet.radius) * Math.Sin(initial_angle(planet.x, planet.y));
+                planet.v_y = initial_velocity(planet.radius) * Math.Sin(initial_angle(planet.x, planet.y));
                 planet.color = 0;
                 planet.id = 0;
                 Globals.planet_list.AddLast(planet);
@@ -167,7 +170,7 @@ namespace NewEndCollision
                 }
                 planet.mass = planet.radius * planet.radius;
                 planet.v_x = initial_velocity(planet.radius) * Math.Cos(initial_angle(planet.x, planet.y));
-                planet.v_x = initial_velocity(planet.radius) * Math.Sin(initial_angle(planet.x, planet.y));
+                planet.v_y = initial_velocity(planet.radius) * Math.Sin(initial_angle(planet.x, planet.y));
                 planet.color = 1;
                 planet.id = 0;
                 Globals.planet_list.AddLast(planet);

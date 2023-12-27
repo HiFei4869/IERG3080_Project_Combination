@@ -5,6 +5,8 @@ using WpfApp2;
 using NewEndCollision;
 using System.Windows.Input;
 using System.Windows;
+using System.Diagnostics;
+using System.Numerics;
 
 /// Ejection and Orbit
 /// Functions can be called: 

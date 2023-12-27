@@ -49,6 +49,8 @@ public class Ball : INotifyPropertyChanged
     protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        //Debug.WriteLine($"PropertyChanged: {propertyName}");
+        //MessageBox.Show($"PropertyChanged: {propertyName}", "Debug Information", MessageBoxButton.OK, MessageBoxImage.Information);
     }
 
 }
@@ -147,6 +149,7 @@ public class GameViewModel : INotifyPropertyChanged
 
         foreach (Planet planet in Globals.planet_list)
         {
+            Debug.WriteLine($"player:{planet.x}, {planet.y}");
             if (planet.color == 0)
                 AddBall(planet.x, planet.y, planet.radius, "blue");
             else if (planet.color == 1)
@@ -170,8 +173,17 @@ public class GameViewModel : INotifyPropertyChanged
 
     public void ResetState()
     {
+        Debug.WriteLine($"before");
         foreach (Planet planet in Globals.planet_list)
         {
+            Debug.WriteLine($"player:{planet.x}, {planet.y}");;
+        }
+        Debug.WriteLine($"after");
+        //MessageBox.Show($"aaaaaaa", "Debug Information", MessageBoxButton.OK, MessageBoxImage.Information);
+        Balls.Clear();
+        foreach (Planet planet in Globals.planet_list)
+        {
+            Debug.WriteLine($"player:{planet.x}, {planet.y}");
             if (planet.color == 0)
                 AddBall(planet.x, planet.y, planet.radius, "blue");
             else if (planet.color == 1)
@@ -182,6 +194,7 @@ public class GameViewModel : INotifyPropertyChanged
                 AddBall(planet.x, planet.y, planet.radius, "orange");
         }
 
+        Balls = new ObservableCollection<Ball>(Balls); // Reassign the collection to trigger update
         OnPropertyChanged(nameof(Balls));
     }
 
@@ -206,30 +219,13 @@ public class GameViewModel : INotifyPropertyChanged
 
     //上面这个更改方式会传递到UI中，会立刻改变，你们别引入一些奇奇怪怪的改变方式蛤到时候你们改的时候用循环跑哈
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // 其他的ViewModel方法
     public event PropertyChangedEventHandler PropertyChanged;
     protected virtual void OnPropertyChanged(string propertyName)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        //Debug.WriteLine($"PropertyChanged: {propertyName}");
+        //MessageBox.Show($"111PropertyChanged: {propertyName}", "Debug Information", MessageBoxButton.OK, MessageBoxImage.Information);
     }
 
 
