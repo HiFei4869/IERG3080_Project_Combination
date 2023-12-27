@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,10 +34,12 @@ namespace WpfApp2
         {
             if (player.radius >= planet1.radius)
             {
+                //Debug.WriteLine($"0");
                 return 0;
             }
             else
             {
+                //Debug.WriteLine($"1");
                 return 1;
             }
         }
@@ -44,23 +47,39 @@ namespace WpfApp2
 
     public class Position
     {
-        public static void ChangePosition(Planet planet)
+        /*public static void ChangePosition(Planet planet)
         {
-            
+            //Debug.WriteLine($"before:{planet.x}, {planet.y}");
             double angle = Math.Atan((planet.y - 480) / (planet.x - 270));
-            planet.x = 0.02 * planet.v_x;
-            planet.y += 0.02 * planet.v_y;
+            planet.x += 0.02 * planet.v_x;
+            planet.y += 0.02 * planet.v_y; //Debug.WriteLine($"{planet.v_x}, {planet.v_y}");
             planet.v_y -= 10 * Math.Sin(angle);
             planet.v_x -= 10 * Math.Cos(angle);
-            //MessageBox.Show($"SplitEject: {planet.x}, {planet.y} ", "Debug Information", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
+            //Debug.WriteLine($"after:{planet.x}, {planet.y}");
+        }*/
+
+        /*public static void ChangePosition(LinkedList<Planet> myLinkedList)
+        {
+            LinkedListNode<Planet> planetNode = myLinkedList.First;
+            while (planetNode != null)
+            {
+                Planet planet = planetNode.Value;
+
+                double angle = Math.Atan((planet.y - 480) / (planet.x - 270));
+                planet.x += 0.02 * planet.v_x;
+                planet.y += 0.02 * planet.v_y; //Debug.WriteLine($"{planet.v_x}, {planet.v_y}");
+                planet.v_y -= 10 * Math.Sin(angle);
+                planet.v_x -= 10 * Math.Cos(angle);
+
+                planetNode = planetNode.Next;
+            }
+        }*/
     }
 
     public partial class Window1 : Window
     {
         public static Planet findPlayer()
         {
-
             LinkedListNode<Planet> node = Globals.planet_list.First;
             while (true)
             {
@@ -157,10 +176,60 @@ namespace WpfApp2
                     check_ejection = 0;
                 }
 
-                foreach (Planet planet in Globals.planet_list)           //change position
+                //Position.ChangePosition(Globals.planet_list);
+
+            /*foreach (Planet planet in Globals.planet_list)           //change position
+            {
+                Position.ChangePosition(planet);
+            }*/
+
+            for (int i = 0; i < Globals.planet_list.Count; i++)
+            {
+                Planet planet = Globals.planet_list.ElementAt(i);
+
+                double angle = Math.Atan((planet.y - 480) / (planet.x - 270));
+                planet.x += 0.02 * planet.v_x;
+                planet.y += 0.02 * planet.v_y;
+                planet.v_y -= 10 * Math.Sin(angle);
+                planet.v_x -= 10 * Math.Cos(angle);
+
+                Planet newPlanet = new Planet();
+                newPlanet.id = planet.id;
+                newPlanet.x = planet.x;
+                newPlanet.y = planet.y;
+                newPlanet.mass = planet.mass;
+                newPlanet.radius = planet.radius;
+                newPlanet.v_x = planet.v_x;
+                newPlanet.v_y = planet.v_y;
+                newPlanet.color = planet.color;
+                Globals.planet_list_new.AddLast(newPlanet);
+                //Debug.WriteLine($"1111Planet {planet.id}: x = {planet.x}, y = {planet.y}");
+            }
+
+            Globals.planet_list.Clear();
+
+            foreach (var newplanet in Globals.planet_list_new)
+            {
+                Globals.planet_list.AddLast(new Planet
                 {
-                    Position.ChangePosition(planet);
-                }           
+                    id = newplanet.id,
+                    x = newplanet.x,
+                    y = newplanet.y,
+                    mass = newplanet.mass,
+                    radius = newplanet.radius,
+                    v_x = newplanet.v_x,
+                    v_y = newplanet.v_y,
+                    color = newplanet.color
+                });
+            }
+
+            Globals.planet_list_new.Clear();
+
+            Debug.WriteLine($"ini");
+                foreach (Planet planet in Globals.planet_list)
+                {
+                    Debug.WriteLine($"player:{planet.x}, {planet.y}"); ;
+                }
 
                 if (TouchBoundary.touchBoundary(Globals.planet_list) == 1) //Check die
                 {
@@ -224,7 +293,9 @@ namespace WpfApp2
                 }
             //}
             //_viewModel = new GameViewModel();
+            //GameCanvas.Children.Clear();
             _viewModel.ResetState();
+            Debug.WriteLine($"1");
             //this.DataContext = _viewModel;
         }
         
